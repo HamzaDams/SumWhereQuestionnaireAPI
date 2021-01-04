@@ -1,28 +1,32 @@
 package fr.sumwhere.questionnaire.controller;
 
+import fr.sumwhere.questionnaire.model.Questionnaire;
+import fr.sumwhere.questionnaire.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/mail/")
 public class QuestionnaireController {
 
     @Autowired
-    public JavaMailSender emailSender;
+    private QuestionnaireService questionnaireService;
 
-    @GetMapping("/envoyerEmail")
-    public String envoyerEmail() {
-        SimpleMailMessage message = new SimpleMailMessage();
-
-        message.setTo("hddesignx@gmail.com");
-        message.setSubject("Test Simple Email");
-        message.setText("Hello, Im testing Simple Email");
-
-        this.emailSender.send(message);
-
-        return "Email Sent!";
+    @PostMapping("/envoyer")
+    public ResponseEntity<?> envoyerEmail(@RequestBody Questionnaire request) {
+        System.out.println(request);
+        boolean isEnvoyer = this.questionnaireService.envoyerEmail(request.getEmailTo(),request.getSujet(),request.getDescription());
+        if(isEnvoyer) {
+            return  ResponseEntity.ok("Envoyer");
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 }
