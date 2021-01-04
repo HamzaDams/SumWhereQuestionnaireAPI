@@ -1,8 +1,5 @@
 package fr.sumwhere.questionnaire.model;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,36 +13,60 @@ public class Questionnaire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //String nom;
-    //String prenom;
+    String nom;
+    String prenom;
     String sujet;
     String emailTo;
+    String email;
     String description;
-    //String site;
+    String site;
     //String label;
-    //String adresse;
-    //String codepostale;
-    //String ville;
-    //long latitude;
-    //long longitude;
-    //int telephone;
-    //Date date;
+    String adresse;
+    int codepostale;
+    String ville;
+    float latitude;
+    float longitude;
+    int telephone;
+    Date date;
 
-    public Questionnaire(String emailTo, String sujet,  String description) {
-        this.emailTo = emailTo;
-        this.sujet = sujet;
-        this.description = description;
-    }
 
     public Questionnaire() {
+    }
+
+    public Questionnaire(Long id, String nom, String prenom, String sujet, String emailTo, String email, String description, String site, String adresse, int codepostale, String ville, float latitude, float longitude, int telephone, Date date) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sujet = sujet;
+        this.emailTo = emailTo;
+        this.email = email;
+        this.description = description;
+        this.site = site;
+        this.adresse = adresse;
+        this.codepostale = codepostale;
+        this.ville = ville;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.telephone = telephone;
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "Questionnaire{" +
-                "emailTo='" + emailTo + '\'' +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
                 ", sujet='" + sujet + '\'' +
+                ", emailTo='" + emailTo + '\'' +
                 ", description='" + description + '\'' +
+                ", site='" + site + '\'' +
+                ", codepostale=" + codepostale +
+                ", ville='" + ville + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", telephone=" + telephone +
+                ", date=" + date +
                 '}';
     }
 }

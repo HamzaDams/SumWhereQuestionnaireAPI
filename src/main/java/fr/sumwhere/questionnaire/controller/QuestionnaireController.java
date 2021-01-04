@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/questionnaire/*")
 public class QuestionnaireController {
 
    @Autowired
@@ -18,7 +19,7 @@ public class QuestionnaireController {
     @PostMapping("/envoyer")
     public ResponseEntity<?> envoyerEmail(@RequestBody Questionnaire request) {
         System.out.println(request);
-        boolean isEnvoyer = this.questionnaireService.envoyerEmail(request.getEmailTo(),request.getSujet(),request.getDescription());
+        boolean isEnvoyer = this.questionnaireService.envoyerEmail(request.getEmailTo(),request.getSujet(),request.getDescription(),request.getEmail(),request.getNom(),request.getPrenom(),request.getAdresse(),request.getSite(), request.getLatitude(), request.getLongitude());
         if(isEnvoyer) {
 
             return new ResponseEntity<>(questionnaireService.sauvegarderQuestionnaire(request), HttpStatus.CREATED);

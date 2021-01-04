@@ -24,7 +24,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
 
     @Override
-    public boolean envoyerEmail(String to, String sujet, String texte) {
+    public boolean envoyerEmail(String to, String sujet, String texte, String email, String adresse, String nom, String prenom, String site, float latitude, float longitude) {
 
         boolean isEnvoyer=false;
 
@@ -49,11 +49,13 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
         MimeMessage message = new MimeMessage(session);
 
+        String result = "Message reçu" + " " + texte + " " + email + " " + adresse + " " + nom + " " + site + " " + latitude + " " + latitude;
+
         try {
             message.setFrom("test31.compte31@gmail.com");
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(sujet);
-            message.setText(texte);
+            message.setText(result);
 
             Transport.send(message);
 
