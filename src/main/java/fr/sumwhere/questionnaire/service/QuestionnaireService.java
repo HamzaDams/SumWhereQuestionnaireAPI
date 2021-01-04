@@ -1,14 +1,15 @@
 package fr.sumwhere.questionnaire.service;
 
+import fr.sumwhere.questionnaire.model.Questionnaire;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.util.Properties;
-
+@Service
+@Transactional
 public interface QuestionnaireService {
 
-    public boolean envoyerEmail(String to, String sujet, String texte);
+    boolean envoyerEmail(String to, String sujet, String texte);
+    Questionnaire sauvegarderQuestionnaire(Questionnaire q);
 
 }

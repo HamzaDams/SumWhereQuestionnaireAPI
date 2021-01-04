@@ -1,6 +1,13 @@
 package fr.sumwhere.questionnaire.service;
 
+import fr.sumwhere.questionnaire.model.Questionnaire;
+import fr.sumwhere.questionnaire.repo.QuestionnaireRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -9,6 +16,13 @@ import java.util.Properties;
 
 @Service
 public class QuestionnaireServiceImpl implements QuestionnaireService {
+
+    private static final Logger logger = LoggerFactory.getLogger(QuestionnaireServiceImpl.class);
+    @Autowired
+    private QuestionnaireRepo questionnaireRepo;
+
+
+
     @Override
     public boolean envoyerEmail(String to, String sujet, String texte) {
 
@@ -47,8 +61,16 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
             isEnvoyer=true;
         }catch(Exception e) {
-            System.out.println(e);
+            logger.error("L'envoi du questionnaire n'a pas pu être effectué" + e);
         }
         return isEnvoyer;
     }
+
+    @Override
+    public Questionnaire sauvegarderQuestionnaire(Questionnaire q) {
+        Questionnaire qRecu = questionnaireRepo.save(q);
+        return qRecu;
+    }
+
+
 }
