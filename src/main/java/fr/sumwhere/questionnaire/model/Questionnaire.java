@@ -1,10 +1,9 @@
 package fr.sumwhere.questionnaire.model;
 import lombok.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +19,10 @@ public class Questionnaire {
     String email;
     String description;
     String site;
-    //String label;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Label> label;
+
     String adresse;
     int codepostale;
     String ville;

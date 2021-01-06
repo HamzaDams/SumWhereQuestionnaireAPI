@@ -57,5 +57,4 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         return qRecu;
     }
 
-
 }
