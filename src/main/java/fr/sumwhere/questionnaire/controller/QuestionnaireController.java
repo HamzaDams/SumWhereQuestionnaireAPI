@@ -19,7 +19,8 @@ public class QuestionnaireController {
    @Autowired
    private QuestionnaireService questionnaireService;
 
-    @PostMapping(value = "/email")
+    //A voir quoi mettre pour l'api
+    @PostMapping(value = "/envoyer")
     @ResponseBody
     public ResponseEntity<?> sendMail(@RequestBody Questionnaire q) throws BusinessResourceException, MessagingException {
         if(questionnaireService.envoyerQuestionnaire(q)){
