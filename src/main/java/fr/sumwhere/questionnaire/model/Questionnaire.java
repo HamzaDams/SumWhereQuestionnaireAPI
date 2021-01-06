@@ -35,7 +35,7 @@ public class Questionnaire {
     public Questionnaire() {
     }
 
-    public Questionnaire(Long id, String nom, String prenom, String sujet, String emailTo, String email, String description, String site, String adresse, int codepostale, String ville, float latitude, float longitude, int telephone, Date date) {
+    public Questionnaire(Long id, String nom, String prenom, String sujet, String emailTo, String email, String description, String site, List<Label> label, String adresse, int codepostale, String ville, float latitude, float longitude, int telephone, Date date) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -44,6 +44,7 @@ public class Questionnaire {
         this.email = email;
         this.description = description;
         this.site = site;
+        this.label = label;
         this.adresse = adresse;
         this.codepostale = codepostale;
         this.ville = ville;
