@@ -9,6 +9,10 @@ import java.util.List;
 @Setter
 @Entity
 public class Questionnaire {
+    public enum Status {
+        VALIDE,ATTENTE,REFUSER
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +35,8 @@ public class Questionnaire {
     int telephone;
     Date date;
 
+    @Enumerated(EnumType.ORDINAL)
+    private Status status;
 
     public Questionnaire() {
     }
@@ -62,8 +68,11 @@ public class Questionnaire {
                 ", prenom='" + prenom + '\'' +
                 ", sujet='" + sujet + '\'' +
                 ", emailTo='" + emailTo + '\'' +
+                ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
                 ", site='" + site + '\'' +
+                ", label=" + label +
+                ", adresse='" + adresse + '\'' +
                 ", codepostale=" + codepostale +
                 ", ville='" + ville + '\'' +
                 ", latitude=" + latitude +
