@@ -36,7 +36,7 @@ public class Questionnaire {
     Date date;
 
     @Enumerated(EnumType.ORDINAL)
-    private Status status;
+    private Status status = Status.ATTENTE;
 
     public Questionnaire() {
     }
