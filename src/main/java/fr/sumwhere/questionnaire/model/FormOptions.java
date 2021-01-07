@@ -21,9 +21,7 @@ public class FormOptions {
     @OneToOne(cascade =  CascadeType.ALL)
     private Formulaire formulaire;
 
-    @OneToOne(
-            cascade =  CascadeType.ALL
-            )
+    @OneToOne(cascade =  CascadeType.ALL)
     private ValidationPage validationPage;
 
     private String accentColor;
