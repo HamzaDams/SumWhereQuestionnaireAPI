@@ -19,10 +19,10 @@ public class Questionnaire {
     String nom;
     String prenom;
     String sujet;
-    String emailTo;
     String email;
     String description;
     String site;
+    String alias;
 
     @OneToMany(cascade = CascadeType.ALL)
     List<Label> label;
@@ -41,15 +41,15 @@ public class Questionnaire {
     public Questionnaire() {
     }
 
-    public Questionnaire(Long id, String nom, String prenom, String sujet, String emailTo, String email, String description, String site, List<Label> label, String adresse, int codepostale, String ville, float latitude, float longitude, int telephone, Date date) {
+    public Questionnaire(Long id, String nom, String prenom, String sujet, String email, String description, String site, String alias, List<Label> label, String adresse, int codepostale, String ville, float latitude, float longitude, int telephone, Date date, Status status) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.sujet = sujet;
-        this.emailTo = emailTo;
         this.email = email;
         this.description = description;
         this.site = site;
+        this.alias = alias;
         this.label = label;
         this.adresse = adresse;
         this.codepostale = codepostale;
@@ -58,6 +58,7 @@ public class Questionnaire {
         this.longitude = longitude;
         this.telephone = telephone;
         this.date = date;
+        this.status = status;
     }
 
     @Override
@@ -67,10 +68,10 @@ public class Questionnaire {
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", sujet='" + sujet + '\'' +
-                ", emailTo='" + emailTo + '\'' +
                 ", email='" + email + '\'' +
                 ", description='" + description + '\'' +
                 ", site='" + site + '\'' +
+                ", alias='" + alias + '\'' +
                 ", label=" + label +
                 ", adresse='" + adresse + '\'' +
                 ", codepostale=" + codepostale +
@@ -79,6 +80,8 @@ public class Questionnaire {
                 ", longitude=" + longitude +
                 ", telephone=" + telephone +
                 ", date=" + date +
+                ", status=" + status +
                 '}';
     }
 }
+

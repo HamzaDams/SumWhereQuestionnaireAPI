@@ -1,6 +1,7 @@
 package fr.sumwhere.questionnaire.controller;
 
 import fr.sumwhere.questionnaire.exception.BusinessResourceException;
+import fr.sumwhere.questionnaire.model.FormOptions;
 import fr.sumwhere.questionnaire.model.Questionnaire;
 import fr.sumwhere.questionnaire.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,9 @@
 package fr.sumwhere.questionnaire.service;
 
+import fr.sumwhere.questionnaire.dto.FormOptionsDTO;
+import fr.sumwhere.questionnaire.model.FormOptions;
 import fr.sumwhere.questionnaire.model.Questionnaire;
+import fr.sumwhere.questionnaire.repo.FormOptionsRepo;
 import fr.sumwhere.questionnaire.repo.QuestionnaireRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +16,9 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Properties;
 
 @Service
@@ -23,6 +28,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     @Autowired
     private QuestionnaireRepo questionnaireRepo;
 
+    @Autowired
+    private FormOptionsRepo formOptionsRepo;
 
     private final TemplateEngine templateEngine;
     private final JavaMailSender javaMailSender;
@@ -32,12 +39,15 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         this.javaMailSender = javaMailSender;
     }
 
-
     public Boolean envoyerQuestionnaire(Questionnaire q) {
-        String contenue = generateContenueMail(q);
+        String aliasName = q.getAlias();
+        Optional<FormOptionsDTO> formOptionsContent = formOptionsRepo.findByAlias(aliasName);
+        String color = formOptionsContent.get().getAccentColor();
+
+        String contenue = generateContenueMail(q, color);
         try {
-            sendMail(q.getSujet(),contenue,q.getEmailTo());
-            generateContenueMail(q);
+            sendMail(q.getSujet(),contenue,formOptionsContent.get().getValidationEmail());
+            generateContenueMail(q, color);
         } catch (MessagingException e) {
             logger.error("Erreur lors de l'envoie du questionnaire par mail - ",e);
             return false;
@@ -45,12 +55,13 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         return true;
     }
 
-    private String generateContenueMail(Questionnaire q){
+    private String generateContenueMail(Questionnaire q, String color){
         Context context = new Context();
         String coords = q.getLatitude() +""+ q.getLongitude();
         String urlMap = "http://maps.google.com/maps/api/staticmap?center=" + coords + ",&zoom=15&markers=" + coords + "|" + coords + "&path=color:0x0000FF80|weight:5|" + coords + "&size=460x460&key=AIzaSyD-25Q3gSx-vVlsmdfXtgEGc37bqwmwKjo";
         context.setVariable("q", q);
         context.setVariable("urlMap", urlMap);
+        context.setVariable("color", color);
         String process = templateEngine.process("questionnaireMailTemplate.html", context);
         return process;
     }

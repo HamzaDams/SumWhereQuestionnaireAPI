@@ -1,5 +1,6 @@
 package fr.sumwhere.questionnaire.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +18,12 @@ public class FormOptions {
     private String alias;
     private String validationEmail;
 
-    @OneToOne
-    private Formulaire form;
+    @OneToOne(cascade =  CascadeType.ALL)
+    private Formulaire formulaire;
 
-    @OneToOne
+    @OneToOne(
+            cascade =  CascadeType.ALL
+            )
     private ValidationPage validationPage;
 
     private String accentColor;
@@ -29,11 +32,11 @@ public class FormOptions {
 
     }
 
-    public FormOptions(Long id, String alias, String validationEmail, Formulaire form, ValidationPage validationPage, String accentColor) {
+    public FormOptions(Long id, String alias, String validationEmail, Formulaire formulaire, ValidationPage validationPage, String accentColor) {
         this.id = id;
         this.alias = alias;
         this.validationEmail = validationEmail;
-        this.form = form;
+        this.formulaire = formulaire;
         this.validationPage = validationPage;
         this.accentColor = accentColor;
     }
@@ -44,7 +47,7 @@ public class FormOptions {
                 "id=" + id +
                 ", alias='" + alias + '\'' +
                 ", validationEmail='" + validationEmail + '\'' +
-                ", form=" + form +
+                ", formulaire=" + formulaire +
                 ", validationPage=" + validationPage +
                 ", accentColor='" + accentColor + '\'' +
                 '}';
