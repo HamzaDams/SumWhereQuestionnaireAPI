@@ -57,8 +57,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
     private String generateContenueMail(Questionnaire q, String color){
         Context context = new Context();
-        String coords = q.getLatitude() +""+ q.getLongitude();
-        String urlMap = "http://maps.google.com/maps/api/staticmap?center=" + coords + ",&zoom=15&markers=" + coords + "|" + coords + "&path=color:0x0000FF80|weight:5|" + coords + "&size=460x460&key=AIzaSyD-25Q3gSx-vVlsmdfXtgEGc37bqwmwKjo";
+        String coords = q.getLatitude() +","+ q.getLongitude();
+        String urlMap = "http://maps.google.com/maps/api/staticmap?center=" + coords + "&zoom=15&markers=" + coords + "|" + coords + "&path=color:0x0000FF80|weight:5|" + coords + "&size=460x460&key=AIzaSyD-25Q3gSx-vVlsmdfXtgEGc37bqwmwKjo";
         context.setVariable("q", q);
         context.setVariable("urlMap", urlMap);
         context.setVariable("color", color);

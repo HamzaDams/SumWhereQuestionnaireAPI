@@ -30,9 +30,9 @@ public class Questionnaire {
     String adresse;
     int codepostale;
     String ville;
-    float latitude;
-    float longitude;
-    int telephone;
+    String latitude;
+    String longitude;
+    String telephone;
     Date date;
 
     @Enumerated(EnumType.ORDINAL)
@@ -41,7 +41,7 @@ public class Questionnaire {
     public Questionnaire() {
     }
 
-    public Questionnaire(Long id, String nom, String prenom, String sujet, String email, String description, String site, String alias, List<Label> label, String adresse, int codepostale, String ville, float latitude, float longitude, int telephone, Date date, Status status) {
+    public Questionnaire(Long id, String nom, String prenom, String sujet, String email, String description, String site, String alias, List<Label> label, String adresse, int codepostale, String ville, String latitude, String longitude, String telephone, Date date, Status status) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;

@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @CrossOrigin("*")
-@RestController()
+@RestController
 @RequestMapping("/options/*")
 public class FormOptionsController {
     @Autowired

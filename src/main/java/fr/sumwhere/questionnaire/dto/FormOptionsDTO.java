@@ -19,15 +19,15 @@ public class FormOptionsDTO implements Serializable {
 
     private Formulaire formulaire;
 
-    private ValidationPage validationPage;
-
     private String accentColor;
 
-    public FormOptionsDTO(String alias, String validationEmail, Formulaire formulaire, ValidationPage validationPage, String accentColor) {
+    private String mapId;
+
+    public FormOptionsDTO(String alias, String validationEmail, Formulaire formulaire, String accentColor, String mapId) {
         this.alias = alias;
         this.validationEmail = validationEmail;
         this.formulaire = formulaire;
-        this.validationPage = validationPage;
         this.accentColor = accentColor;
+        this.mapId = mapId;
     }
 }
