@@ -13,5 +13,6 @@ public interface QuestionnaireService {
 
     Boolean envoyerQuestionnaire(Questionnaire q) throws MessagingException;
     Questionnaire sauvegarderQuestionnaire(Questionnaire q) throws  BusinessResourceException;
+    Enum<Questionnaire.Status> updateStatus(Enum<Questionnaire.Status> status);
 
 }

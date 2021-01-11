@@ -25,17 +25,20 @@ public class FormOptions {
 
     private String mapId;
 
+    private String logoUrl;
+
     public FormOptions() {
 
     }
 
-    public FormOptions(Long id, String alias, String validationEmail, Formulaire formulaire, String accentColor, String mapId) {
+    public FormOptions(Long id, String alias, String validationEmail, Formulaire formulaire, String accentColor, String mapId, String logoUrl) {
         this.id = id;
         this.alias = alias;
         this.validationEmail = validationEmail;
         this.formulaire = formulaire;
         this.accentColor = accentColor;
         this.mapId = mapId;
+        this.logoUrl = logoUrl;
     }
 
     @Override
@@ -47,6 +50,7 @@ public class FormOptions {
                 ", formulaire=" + formulaire +
                 ", accentColor='" + accentColor + '\'' +
                 ", mapId='" + mapId + '\'' +
+                ", logoUrl='" + logoUrl + '\'' +
                 '}';
     }
 }

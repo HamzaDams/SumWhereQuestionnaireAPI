@@ -1,7 +1,6 @@
 package fr.sumwhere.questionnaire.service;
 
 import fr.sumwhere.questionnaire.dto.FormOptionsDTO;
-import fr.sumwhere.questionnaire.model.FormOptions;
 import fr.sumwhere.questionnaire.model.Questionnaire;
 import fr.sumwhere.questionnaire.repo.FormOptionsRepo;
 import fr.sumwhere.questionnaire.repo.QuestionnaireRepo;
@@ -16,10 +15,7 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Optional;
-import java.util.Properties;
 
 @Service
 public class QuestionnaireServiceImpl implements QuestionnaireService {
@@ -43,11 +39,12 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         String aliasName = q.getAlias();
         Optional<FormOptionsDTO> formOptionsContent = formOptionsRepo.findByAlias(aliasName);
         String color = formOptionsContent.get().getAccentColor();
+        String logoUrl = formOptionsContent.get().getLogoUrl();
 
-        String contenue = generateContenueMail(q, color);
+        String contenue = generateContenueMail(q, color, logoUrl);
         try {
             sendMail(q.getSujet(),contenue,formOptionsContent.get().getValidationEmail());
-            generateContenueMail(q, color);
+            generateContenueMail(q, color, logoUrl);
         } catch (MessagingException e) {
             logger.error("Erreur lors de l'envoie du questionnaire par mail - ",e);
             return false;
@@ -55,13 +52,14 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         return true;
     }
 
-    private String generateContenueMail(Questionnaire q, String color){
+    private String generateContenueMail(Questionnaire q, String color, String logoUrl){
         Context context = new Context();
         String coords = q.getLatitude() +","+ q.getLongitude();
         String urlMap = "http://maps.google.com/maps/api/staticmap?center=" + coords + "&zoom=15&markers=" + coords + "|" + coords + "&path=color:0x0000FF80|weight:5|" + coords + "&size=460x460&key=AIzaSyD-25Q3gSx-vVlsmdfXtgEGc37bqwmwKjo";
         context.setVariable("q", q);
         context.setVariable("urlMap", urlMap);
         context.setVariable("color", color);
+        context.setVariable("logoUrl", logoUrl);
         String process = templateEngine.process("questionnaireMailTemplate.html", context);
         return process;
     }
@@ -79,5 +77,10 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     public Questionnaire sauvegarderQuestionnaire(Questionnaire q) {
         Questionnaire qRecu = questionnaireRepo.save(q);
         return qRecu;
+    }
+
+    public Enum<Questionnaire.Status> updateStatus(Enum<Questionnaire.Status> status) {
+        questionnaireRepo.updateStatus(status);
+        return status;
     }
 }

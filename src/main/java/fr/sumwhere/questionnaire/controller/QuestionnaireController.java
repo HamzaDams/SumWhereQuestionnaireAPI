@@ -32,4 +32,11 @@ public class QuestionnaireController {
         }
     }
 
+    @PutMapping("/status/{valid}")
+    public ResponseEntity<?> updateStatus(@RequestParam(value = "valid", required = true) Enum<Questionnaire.Status> status) {
+        Enum<Questionnaire.Status> qUpdate = questionnaireService.updateStatus(status);
+
+        return new ResponseEntity<>(qUpdate, HttpStatus.OK);
+    }
+
 }
