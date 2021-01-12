@@ -37,6 +37,9 @@ public class Questionnaire {
     String telephone;
     Date date;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Horaire> horaire;
+
     @Enumerated(EnumType.ORDINAL)
     private Status status = Status.ATTENTE;
 

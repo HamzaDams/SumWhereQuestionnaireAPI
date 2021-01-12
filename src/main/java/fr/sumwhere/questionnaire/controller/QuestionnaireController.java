@@ -1,5 +1,6 @@
 package fr.sumwhere.questionnaire.controller;
 
+import fr.sumwhere.questionnaire.dto.FormOptionsDTO;
 import fr.sumwhere.questionnaire.exception.BusinessResourceException;
 import fr.sumwhere.questionnaire.model.FormOptions;
 import fr.sumwhere.questionnaire.model.Questionnaire;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -32,11 +34,9 @@ public class QuestionnaireController {
         }
     }
 
-    @PutMapping("/status/{valid}")
-    public ResponseEntity<?> updateStatus(@RequestParam(value = "valid", required = true) Enum<Questionnaire.Status> status) {
-        Enum<Questionnaire.Status> qUpdate = questionnaireService.updateStatus(status);
-
-        return new ResponseEntity<>(qUpdate, HttpStatus.OK);
+    @GetMapping("/{alias}")
+    public Optional<Questionnaire> findOptionsByAlias(@PathVariable(value = "alias") String alias){
+        return questionnaireService.findQuestionnaireByAlias(alias);
     }
 
 }

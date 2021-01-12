@@ -1,6 +1,7 @@
 package fr.sumwhere.questionnaire.service;
 
 import fr.sumwhere.questionnaire.dto.FormOptionsDTO;
+import fr.sumwhere.questionnaire.exception.BusinessResourceException;
 import fr.sumwhere.questionnaire.model.Questionnaire;
 import fr.sumwhere.questionnaire.repo.FormOptionsRepo;
 import fr.sumwhere.questionnaire.repo.QuestionnaireRepo;
@@ -56,8 +57,10 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         Context context = new Context();
         String coords = q.getLatitude() +","+ q.getLongitude();
         String urlMap = "http://maps.google.com/maps/api/staticmap?center=" + coords + "&zoom=15&markers=" + coords + "|" + coords + "&path=color:0x0000FF80|weight:5|" + coords + "&size=460x460&key=AIzaSyD-25Q3gSx-vVlsmdfXtgEGc37bqwmwKjo";
+        String urlSuccess = "http://localhost:4200/success/" + q.getAlias();
         context.setVariable("q", q);
         context.setVariable("urlMap", urlMap);
+        context.setVariable("urlSuccess", urlSuccess);
         context.setVariable("color", color);
         context.setVariable("logoUrl", logoUrl);
         String process = templateEngine.process("questionnaireMailTemplate.html", context);
@@ -79,8 +82,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         return qRecu;
     }
 
-    public Enum<Questionnaire.Status> updateStatus(Enum<Questionnaire.Status> status) {
-        questionnaireRepo.updateStatus(status);
-        return status;
+    @Override
+    public Optional<Questionnaire> findQuestionnaireByAlias(String alias) {
+        Optional<Questionnaire> questionnaireFound = questionnaireRepo.findByAlias(alias);
+        return questionnaireFound;
     }
 }

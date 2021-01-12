@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface QuestionnaireRepo extends JpaRepository<Questionnaire, Long> {
-
-    @Query("update Questionnaire q set q.status = ?1")
-    void updateStatus(Enum<Questionnaire.Status> status);
+    Optional<Questionnaire> findByAlias(String alias);
 }
