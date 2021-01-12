@@ -57,10 +57,13 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         Context context = new Context();
         String coords = q.getLatitude() +","+ q.getLongitude();
         String urlMap = "http://maps.google.com/maps/api/staticmap?center=" + coords + "&zoom=15&markers=" + coords + "|" + coords + "&path=color:0x0000FF80|weight:5|" + coords + "&size=460x460&key=AIzaSyD-25Q3gSx-vVlsmdfXtgEGc37bqwmwKjo";
-        String urlSuccess = "http://localhost:4200/success/" + q.getAlias();
+
+        String urlSuccess = "http://localhost:4200/success/" + q.getDemandeAlias();
+        String urlRefuser = "http://localhost:4200/refuser/" + q.getDemandeAlias();
         context.setVariable("q", q);
         context.setVariable("urlMap", urlMap);
         context.setVariable("urlSuccess", urlSuccess);
+        context.setVariable("urlRefuser", urlRefuser);
         context.setVariable("color", color);
         context.setVariable("logoUrl", logoUrl);
         String process = templateEngine.process("questionnaireMailTemplate.html", context);
@@ -84,7 +87,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
     @Override
     public Optional<Questionnaire> findQuestionnaireByAlias(String alias) {
-        Optional<Questionnaire> questionnaireFound = questionnaireRepo.findByAlias(alias);
+        Optional<Questionnaire> questionnaireFound = questionnaireRepo.findByDemandeAlias(alias);
         return questionnaireFound;
     }
 }

@@ -22,6 +22,7 @@ public class Questionnaire {
     String email;
     String description;
     String site;
+    String demandeAlias;
     String alias;
 
     String placeName;
@@ -46,7 +47,7 @@ public class Questionnaire {
     public Questionnaire() {
     }
 
-    public Questionnaire(Long id, String nom, String prenom, String sujet, String email, String description, String site, String alias, String placeName, List<Label> label, String adresse, int codepostale, String ville, String latitude, String longitude, String telephone, Date date, Status status) {
+    public Questionnaire(Long id, String nom, String prenom, String sujet, String email, String description, String site, String alias,String demandeAlias, String placeName, List<Label> label, String adresse, int codepostale, String ville, String latitude, String longitude, String telephone, Date date, Status status) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -55,6 +56,7 @@ public class Questionnaire {
         this.description = description;
         this.site = site;
         this.alias = alias;
+        this.demandeAlias = demandeAlias;
         this.placeName = placeName;
         this.label = label;
         this.adresse = adresse;
@@ -78,6 +80,7 @@ public class Questionnaire {
                 ", description='" + description + '\'' +
                 ", site='" + site + '\'' +
                 ", alias='" + alias + '\'' +
+                ", demandeAlias='" + demandeAlias + '\'' +
                 ", placeName='" + placeName + '\'' +
                 ", label=" + label +
                 ", adresse='" + adresse + '\'' +
