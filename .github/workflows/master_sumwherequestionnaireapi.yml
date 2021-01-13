@@ -26,7 +26,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'questionnaire'
+        app-name: 'SumWhereQuestionnaireAPI'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_c94ab93849ed49458d4211b6a3f61bd9 }}
         package: '${{ github.workspace }}/target/*.jar'
