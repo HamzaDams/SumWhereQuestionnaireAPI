@@ -29,4 +29,4 @@ jobs:
         app-name: 'sumwherequestionnaireapi'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_c94ab93849ed49458d4211b6a3f61bd9 }}
-        package: '${{ github.workspace }}/target/*.war'
+        package: '${{ github.workspace }}/target/*.jar'
